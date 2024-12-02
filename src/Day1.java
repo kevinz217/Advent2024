@@ -11,7 +11,6 @@ public class Day1 {
         ArrayList<String> fileData = getFileData("src/Day1Input.txt");
         ArrayList<Integer> list1 = new ArrayList<Integer>();
         ArrayList<Integer> list2 = new ArrayList<Integer>();
-        int total = 0;
         for (int i = 0; i < fileData.size(); i++) {
             String[] line = (fileData.get(i)).split("   ");
             list1.add(Integer.parseInt(line[0]));
@@ -19,10 +18,9 @@ public class Day1 {
         }
         Collections.sort(list1);
         Collections.sort(list2);
-        for (int i = 0; i < 1000; i++) {
-            total += Math.abs(list1.get(i) - list2.get(i));
-        }
-        System.out.println(total);
+
+        System.out.println("Part one answer : " + partOne(list1, list2));
+        //System.out.println("Part two answer : " + partTwo(list1, list2));
     }
 
     public static ArrayList<String> getFileData(String fileName) {
@@ -36,9 +34,20 @@ public class Day1 {
                     fileData.add(line);
             }
             return fileData;
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             return fileData;
         }
+    }
+
+    public static int partOne(ArrayList<Integer> list1, ArrayList<Integer> list2) {
+        int total = 0;
+        for (int i = 0; i < 1000; i++) {
+            total += Math.abs(list1.get(i) - list2.get(i));
+        }
+        return total;
+    }
+
+    public static int partTwo(ArrayList<Integer> list1, ArrayList<Integer> list2) {
+        return 0;
     }
 }
