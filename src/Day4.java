@@ -42,9 +42,17 @@ public class Day4 {
         int ans = 0;
 
         for (int i = 0; i < inputArray.length; i++) {
-            for (int j = 0; j < inputArray.length; j++) {
+            for (int j = 0; j < inputArray[i].length; j++) {
                 String character = inputArray[i][j];
                 if (character.equals("X")) {
+                    if (checkForwards(i,j, inputArray)) {ans++;}
+                    if (checkBackwards(i,j, inputArray)) {ans++;}
+                    if (checkUpwards(i,j, inputArray)) {ans++;}
+                    if (checkDownwards(i,j, inputArray)) {ans++;}
+                    if (checkTopLeft(i,j, inputArray)) {ans++;}
+                    if (checkTopRight(i,j, inputArray)) {ans++;}
+                    if (checkBottomLeft(i,j, inputArray)) {ans++;}
+                    if (checkBottomRight(i,j, inputArray)) {ans++;}
 
                 }
             }
@@ -54,12 +62,139 @@ public class Day4 {
 
     public static int partTwo(String[][] inputArray) {
         int ans = 0;
+        for (int i = 0; i < inputArray.length; i++) {
+            for (int j = 0; j < inputArray[i].length; j++) {
+                String character = inputArray[i][j];
+                if (character.equals("M")) {
 
+                }
+            }
+        }
         return ans;
     }
 
-    public static boolean checkFowards(int a, int b) {
-        if
+    public static boolean checkForwards(int a, int b, String[][] inputArray) {
+        if (b <= inputArray[a].length - 3) {
+            if (inputArray[a][b + 1].equals("M")) {
+                if (inputArray[a][b + 2].equals("A")) {
+                    if (inputArray[a][b + 3].equals("S")) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
+    public static boolean checkBackwards(int a, int b, String[][] inputArray) {
+        if (b >= 2) {
+            if (inputArray[a][b - 1].equals("M")) {
+                if (inputArray[a][b - 2].equals("A")) {
+                    if (inputArray[a][b - 3].equals("S")) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkUpwards(int a, int b, String[][] inputArray) {
+        if (a >= 3) {
+            if (inputArray[a - 1][b].equals("M")) {
+                if (inputArray[a - 2][b].equals("A")) {
+                    if (inputArray[a - 3][b].equals("S")) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkDownwards(int a, int b, String[][] inputArray) {
+        if (a <= inputArray.length - 4) {
+            if (inputArray[a + 1][b].equals("M")) {
+                if (inputArray[a + 2][b].equals("A")) {
+                    if (inputArray[a + 3][b].equals("S")) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkTopLeft(int a, int b, String[][] inputArray) {
+        if (a >= 3) {
+            if (b >= 3) {
+                if (inputArray[a - 1][b - 1].equals("M")) {
+                    if (inputArray[a - 2][b - 2].equals("A")) {
+                        if (inputArray[a - 3][b - 3].equals("S")) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkTopRight(int a, int b, String[][] inputArray) {
+        if (a >= 3) {
+            if (b <= inputArray[a].length - 4) {
+                if (inputArray[a - 1][b + 1].equals("M")) {
+                    if (inputArray[a - 2][b + 2].equals("A")) {
+                        if (inputArray[a - 3][b + 3].equals("S")) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkBottomLeft(int a, int b, String[][] inputArray) {
+        if (a <= inputArray.length - 4) {
+            if (b >= 3) {
+                if (inputArray[a + 1][b - 1].equals("M")) {
+                    if (inputArray[a + 2][b - 2].equals("A")) {
+                        if (inputArray[a + 3][b - 3].equals("S")) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkBottomRight(int a, int b, String[][] inputArray) {
+        if (a <= inputArray.length - 4) {
+            if (b <= inputArray[a].length - 4) {
+                if (inputArray[a + 1][b + 1].equals("M")) {
+                    if (inputArray[a + 2][b + 2].equals("A")) {
+                        if (inputArray[a + 3][b + 3].equals("S")) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkMas(int a, int b, String[][] inputArray) {
+        if (a <= inputArray.length - 4) {
+            if (b <= inputArray[a].length - 4) {
+                    if (inputArray[a + 2][b + 2].equals("A")) {
+                        if (inputArray[a + 3][b + 3].equals("S")) {
+                            return true;
+                        }
+                    }
+            }
+        }
+        return false;
+    }
 }
