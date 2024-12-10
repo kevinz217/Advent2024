@@ -66,10 +66,11 @@ public class Day4 {
             for (int j = 0; j < inputArray[i].length; j++) {
                 String character = inputArray[i][j];
                 if (character.equals("M")) {
-
+                    if (checkMas(i,j,inputArray)) {ans++;}
                 }
             }
         }
+
         return ans;
     }
 
@@ -186,13 +187,101 @@ public class Day4 {
     }
 
     public static boolean checkMas(int a, int b, String[][] inputArray) {
-        if (a <= inputArray.length - 4) {
-            if (b <= inputArray[a].length - 4) {
-                    if (inputArray[a + 2][b + 2].equals("A")) {
-                        if (inputArray[a + 3][b + 3].equals("S")) {
-                            return true;
-                        }
+        if (a <= inputArray.length - 3 && a >= 3) {
+            if (b <= inputArray[a].length - 3 && b >= 3) {
+                if (checkMBottomLeft(a,b,inputArray) || checkMTopLeft(a,b,inputArray) || checkTopRight(a,b,inputArray) || checkMTopLeft(a,b,inputArray)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkMBottomLeft(int a, int b, String[][] inputArray) {
+        if (inputArray[a-1][b+1].equals("A")) {
+            if (inputArray[a-2][b+2].equals("S")) {
+                if (inputArray[a-2][b].equals("M")) {
+                    if (inputArray[a][b+2].equals("S")){
+                        String[][] newArray = new String[inputArray.length][inputArray[0].length];
+                        newArray[a-1][b+1] = "P";
+                        inputArray = newArray;
+                        return true;
                     }
+                } else if (inputArray[a][b+2].equals("M")) {
+                    if (inputArray[a-2][b].equals("S")){
+                        String[][] newArray = new String[inputArray.length][inputArray[0].length];
+                        newArray[a-1][b+1] = "P";
+                        inputArray = newArray;
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    public static boolean checkMTopLeft(int a, int b, String[][] inputArray) {
+        if (inputArray[a+1][b+1].equals("A")) {
+            if (inputArray[a+2][b+2].equals("S")) {
+                if (inputArray[a+2][b].equals("M")) {
+                    if (inputArray[a][b+2].equals("S")){
+                        String[][] newArray = new String[inputArray.length][inputArray[0].length];
+                        newArray[a+1][b+1] = "P";
+                        inputArray = newArray;
+                        return true;
+                    }
+                } else if (inputArray[a][b+2].equals("M")) {
+                    if (inputArray[a+2][b].equals("S")){
+                        String[][] newArray = new String[inputArray.length][inputArray[0].length];
+                        newArray[a-1][b+1] = "P";
+                        inputArray = newArray;
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkMBottomRight(int a, int b, String[][] inputArray) {
+        if (inputArray[a-1][b-1].equals("A")) {
+            if (inputArray[a-2][b-2].equals("S")) {
+                if (inputArray[a-2][b].equals("M")) {
+                    if (inputArray[a][b-2].equals("S")){
+                        String[][] newArray = new String[inputArray.length][inputArray[0].length];
+                        newArray[a-1][b-1] = "P";
+                        inputArray = newArray;
+                        return true;
+                    }
+                } else if (inputArray[a][b-2].equals("M")) {
+                    if (inputArray[a-2][b].equals("S")){
+                        String[][] newArray = new String[inputArray.length][inputArray[0].length];
+                        newArray[a-1][b-1] = "P";
+                        inputArray = newArray;
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    public static boolean checkMTopRight(int a, int b, String[][] inputArray) {
+        if (inputArray[a-1][b-1].equals("A")) {
+            if (inputArray[a-2][b-2].equals("S")) {
+                if (inputArray[a+2][b].equals("M")) {
+                    if (inputArray[a][b-2].equals("S")){
+                        String[][] newArray = new String[inputArray.length][inputArray[0].length];
+                        newArray[a+1][b+1] = "P";
+                        inputArray = newArray;
+                        return true;
+                    }
+                } else if (inputArray[a][b-2].equals("M")) {
+                    if (inputArray[a+2][b].equals("S")){
+                        String[][] newArray = new String[inputArray.length][inputArray[0].length];
+                        newArray[a-1][b+1] = "P";
+                        inputArray = newArray;
+                        return true;
+                    }
+                }
             }
         }
         return false;
