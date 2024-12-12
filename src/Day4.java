@@ -18,7 +18,7 @@ public class Day4 {
             }
         }
 
-        System.out.println("Part one answer : " + partOne(inputArray));
+        //System.out.println("Part one answer : " + partOne(inputArray));
         System.out.println("Part two answer : " + partTwo(inputArray));
     }
 
@@ -187,53 +187,79 @@ public class Day4 {
     }
 
     public static boolean checkMas(int a, int b, String[][] inputArray) {
-        if (a <= inputArray.length - 3 && a >= 3) {
-            if (b <= inputArray[a].length - 3 && b >= 3) {
-                if (checkMBottomLeft(a,b,inputArray) || checkMTopLeft(a,b,inputArray) || checkTopRight(a,b,inputArray) || checkMTopLeft(a,b,inputArray)) {
-                    return true;
+        //i love try catch making me separate into 4 different try
+        try {
+            if (checkMBottom(a,b, inputArray)) {
+                return true;
+            }
+        }
+        catch (Exception e) {
+            //ignore all errors
+        }
+        try {
+
+            if (checkMLeft(a, b, inputArray)) {
+                return true;
+            }
+
+        }
+        catch (Exception e) {
+            //ignore all errors
+        }
+        try {
+
+            if (checkMTop(a,b,inputArray)) {
+                return true;
+            }
+
+        }
+        catch (Exception e) {
+            //ignore all errors
+        }
+        try {
+            if (checkMRight(a,b, inputArray)) {
+                return true;
+            }
+        }
+        catch (Exception e) {
+            //ignore all errors
+        }
+        return false;
+    }
+
+    public static boolean checkMLeft(int a, int b, String[][] inputArray) {
+        if (inputArray[a + 2][b].equals("M")) {
+            if (inputArray[a + 1][b + 1].equals("A")) {
+                if (inputArray[a][b + 2].equals("S")) {
+                    if (inputArray[a+2][b+2].equals("S")) {
+                        System.out.println("LEFT CORDS : " + a + b );
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    public static boolean checkMTop(int a, int b, String[][] inputArray) {
+        if (inputArray[a][b+2].equals("M")) {
+            if (inputArray[a + 1][b + 1].equals("A")) {
+                if (inputArray[a+2][b].equals("S")) {
+                    if (inputArray[a+2][b+2].equals("S")) {
+                        System.out.println(" TOP CORDS : " + a + b );
+                        return true;
+                    }
                 }
             }
         }
         return false;
     }
 
-    public static boolean checkMBottomLeft(int a, int b, String[][] inputArray) {
-        if (inputArray[a-1][b+1].equals("A")) {
-            if (inputArray[a-2][b+2].equals("S")) {
-                if (inputArray[a-2][b].equals("M")) {
-                    if (inputArray[a][b+2].equals("S")){
-                        String[][] newArray = new String[inputArray.length][inputArray[0].length];
-                        newArray[a-1][b+1] = "P";
-                        inputArray = newArray;
-                        return true;
-                    }
-                } else if (inputArray[a][b+2].equals("M")) {
-                    if (inputArray[a-2][b].equals("S")){
-                        String[][] newArray = new String[inputArray.length][inputArray[0].length];
-                        newArray[a-1][b+1] = "P";
-                        inputArray = newArray;
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-    public static boolean checkMTopLeft(int a, int b, String[][] inputArray) {
-        if (inputArray[a+1][b+1].equals("A")) {
-            if (inputArray[a+2][b+2].equals("S")) {
-                if (inputArray[a+2][b].equals("M")) {
-                    if (inputArray[a][b+2].equals("S")){
-                        String[][] newArray = new String[inputArray.length][inputArray[0].length];
-                        newArray[a+1][b+1] = "P";
-                        inputArray = newArray;
-                        return true;
-                    }
-                } else if (inputArray[a][b+2].equals("M")) {
-                    if (inputArray[a+2][b].equals("S")){
-                        String[][] newArray = new String[inputArray.length][inputArray[0].length];
-                        newArray[a-1][b+1] = "P";
-                        inputArray = newArray;
+    public static boolean checkMBottom(int a, int b, String[][] inputArray) {
+        if (inputArray[a][b+2].equals("M")) {
+            if (inputArray[a - 1][b + 1].equals("A")) {
+                if (inputArray[a-2][b].equals("S")) {
+                    if (inputArray[a-2][b+2].equals("S")) {
+                        System.out.println("BOTTOM CORDS : " + a + b );
                         return true;
                     }
                 }
@@ -242,43 +268,12 @@ public class Day4 {
         return false;
     }
 
-    public static boolean checkMBottomRight(int a, int b, String[][] inputArray) {
-        if (inputArray[a-1][b-1].equals("A")) {
-            if (inputArray[a-2][b-2].equals("S")) {
-                if (inputArray[a-2][b].equals("M")) {
-                    if (inputArray[a][b-2].equals("S")){
-                        String[][] newArray = new String[inputArray.length][inputArray[0].length];
-                        newArray[a-1][b-1] = "P";
-                        inputArray = newArray;
-                        return true;
-                    }
-                } else if (inputArray[a][b-2].equals("M")) {
-                    if (inputArray[a-2][b].equals("S")){
-                        String[][] newArray = new String[inputArray.length][inputArray[0].length];
-                        newArray[a-1][b-1] = "P";
-                        inputArray = newArray;
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-    public static boolean checkMTopRight(int a, int b, String[][] inputArray) {
-        if (inputArray[a-1][b-1].equals("A")) {
-            if (inputArray[a-2][b-2].equals("S")) {
-                if (inputArray[a+2][b].equals("M")) {
-                    if (inputArray[a][b-2].equals("S")){
-                        String[][] newArray = new String[inputArray.length][inputArray[0].length];
-                        newArray[a+1][b+1] = "P";
-                        inputArray = newArray;
-                        return true;
-                    }
-                } else if (inputArray[a][b-2].equals("M")) {
-                    if (inputArray[a+2][b].equals("S")){
-                        String[][] newArray = new String[inputArray.length][inputArray[0].length];
-                        newArray[a-1][b+1] = "P";
-                        inputArray = newArray;
+    public static boolean checkMRight(int a, int b, String[][] inputArray) {
+        if (inputArray[a+2][b].equals("M")) {
+            if (inputArray[a+1][b-1].equals("A")) {
+                if (inputArray[a][b-2].equals("S")) {
+                    if (inputArray[a+2][b-2].equals("S")) {
+                        System.out.println("RIGHT CORDS : " + a + b );
                         return true;
                     }
                 }
