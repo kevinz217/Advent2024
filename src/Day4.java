@@ -187,34 +187,30 @@ public class Day4 {
     }
 
     public static boolean checkMas(int a, int b, String[][] inputArray) {
-        //i love try catch making me separate into 4 different try
+        //i had to manually get the answer for each one separately and add each of them up in a calculator
         try {
             if (checkMBottom(a,b, inputArray)) {
                 return true;
             }
         }
         catch (Exception e) {
-            //ignore all errors
+            return false;
         }
         try {
-
-            if (checkMLeft(a, b, inputArray)) {
-                return true;
-            }
-
+        if (checkMLeft(a, b, inputArray)) {
+            return true;
+        }
         }
         catch (Exception e) {
-            //ignore all errors
+            return false;
         }
         try {
-
             if (checkMTop(a,b,inputArray)) {
                 return true;
             }
-
         }
         catch (Exception e) {
-            //ignore all errors
+            return false;
         }
         try {
             if (checkMRight(a,b, inputArray)) {
@@ -222,7 +218,7 @@ public class Day4 {
             }
         }
         catch (Exception e) {
-            //ignore all errors
+            return false;
         }
         return false;
     }
