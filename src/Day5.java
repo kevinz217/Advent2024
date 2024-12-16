@@ -9,31 +9,20 @@ public class Day5 {
 
         ArrayList<String> fileData = getFileData("src/Day5Input.txt");
         ArrayList<String> rules = new ArrayList<>();
-        ArrayList<String> pageLists = new ArrayList<>();
+        ArrayList<String> pageListss = new ArrayList<>();
         for (int i = 0; i < fileData.size(); i++) {
-            if (fileData.get(i).equals(" ")){
-                //nvm this doesnt work
-                break;
+            if (fileData.get(i).contains("|")){
+                //gets all the page rules
+                rules.add(fileData.get(i));
             }
-            rules.add(fileData.get(i));
-        }
-        boolean start = false;
-        for (int i = 0; i < fileData.size(); i++) {
-            if (fileData.get(i).equals(" ")){
-                start = true;
-            }
-            if (start) {
-                pageLists.add(fileData.get(i));
+            if (fileData.get(i).contains(",")) {
+                //gets all the pages 2nd half
+                pageListss.add(fileData.get(i));
             }
         }
 
-        for (int i = 0; i < rules.size(); i++) {
-            System.out.println(rules.get(i));
-        }
-        System.out.println();
-
-        System.out.println("Part one answer : " + partOne(fileData));
-        System.out.println("Part two answer : " + partTwo(fileData));
+        System.out.println("Part one answer : " + partOne(rules,pageListss));
+        System.out.println("Part two answer : " + partTwo(rules,pageListss));
     }
 
     public static ArrayList<String> getFileData(String fileName) {
@@ -52,15 +41,33 @@ public class Day5 {
         }
     }
 
-    public static int partOne(ArrayList<String> fileData) {
+    public static int partOne(ArrayList<String> rules, ArrayList<String> pageLists) {
         int ans = 0;
+
+        for (int pages = 0; pages < pageLists.size(); pages++) {
+            //gets a singular line of pages
+            ArrayList<String> thePages = (ArrayList<String>) Arrays.asList(pageLists.get(pages).split(","));
+            if (checkRules(thePages,rules)) {
+                int middleIdx = thePages.size()/2 + 1;
+                ans += Integer.parseInt(thePages.get(middleIdx));
+            }
+        }
+
         return ans;
     }
 
-    public static int partTwo(ArrayList<String> fileData) {
+    public static int partTwo(ArrayList<String> rules, ArrayList<String> pageLists) {
         int ans = 0;
 
         return ans;
     }
 
+    public static boolean checkRules(ArrayList<String> thePages, ArrayList<String> rules) {
+        for (int i = 0; i < rules.size(); i++) {
+            String num1 = rules.get(i).substring(0,3);
+            String num2 = rules.get(i).substring(3);
+            if (thePages.get(0))
+        }
+        return true;
+    }
 }
