@@ -66,7 +66,9 @@ public class Day5 {
         for (int i = 0; i < rules.size(); i++) {
             String num1 = rules.get(i).substring(0,3);
             String num2 = rules.get(i).substring(3);
-            if (thePages.get(0))
+            if (thePages.get(0).contains(num1) || thePages.get(0).contains(num2)) {
+
+            }
         }
         return true;
     }
