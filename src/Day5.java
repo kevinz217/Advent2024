@@ -46,9 +46,9 @@ public class Day5 {
 
         for (int pages = 0; pages < pageLists.size(); pages++) {
             //gets a singular line of pages
-            ArrayList<String> thePages = (ArrayList<String>) Arrays.asList(pageLists.get(pages).split(","));
+            ArrayList<String> thePages = new ArrayList<>(Arrays.asList(pageLists.get(pages).split(",")));
             if (checkRules(thePages,rules)) {
-                int middleIdx = thePages.size()/2 + 1;
+                int middleIdx = thePages.size()/2;
                 ans += Integer.parseInt(thePages.get(middleIdx));
             }
         }
@@ -64,10 +64,12 @@ public class Day5 {
 
     public static boolean checkRules(ArrayList<String> thePages, ArrayList<String> rules) {
         for (int i = 0; i < rules.size(); i++) {
-            String num1 = rules.get(i).substring(0,3);
+            String num1 = rules.get(i).substring(0,2);
             String num2 = rules.get(i).substring(3);
-            if (thePages.get(0).contains(num1) || thePages.get(0).contains(num2)) {
-
+            if (thePages.contains(num1) && thePages.contains(num2)) {
+                if (thePages.indexOf(num1) > thePages.indexOf(num2)) {
+                    return false;
+                }
             }
         }
         return true;
